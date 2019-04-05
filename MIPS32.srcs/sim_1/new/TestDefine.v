@@ -13,3 +13,10 @@
 `define MemElem         [7:0]
 `define MemSize         [65535:0]
 `define NonInstr        32'h00000000
+`define RegAddrWide     [4:0]
+`define NumRegs         32
+`define ReadEnable     1'b1
+`define ReadDisable    1'b0
+`define WriteEnable     1'b1
+`define WriteDisable    1'b0
+`define NonData         32'h00000000

@@ -30,9 +30,7 @@ set_property ip_output_repo c:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
   C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/Define.v
-  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/PC_reg.v
-  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/ROM.v
-  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/Instr_Fetch.v
+  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/Regiters.v
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -45,12 +43,12 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top Instr_Fetch -part xc7a50tcpg236-3
+synth_design -top Regiters -part xc7a50tcpg236-3
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef Instr_Fetch.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file Instr_Fetch_utilization_synth.rpt -pb Instr_Fetch_utilization_synth.pb"
+write_checkpoint -force -noxdef Regiters.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file Regiters_utilization_synth.rpt -pb Regiters_utilization_synth.pb"
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

@@ -22,22 +22,50 @@
 
 
 module test_bench( );
-    reg clk;
-    reg reset;
-    wire `InstrBus Instr;
+    reg i_reset;
+    reg i_clk;
+    reg i_ce; 
+    reg i_re1;
+    reg `RegAddrWide i_ReadReg1;
+    wire `DataBus o_ReadData1;
+    reg i_re2;
+    reg `RegAddrWide i_ReadReg2;
+    wire `DataBus o_ReadData2;
+    reg i_we;
+    reg `RegAddrWide i_WriteReg;
+    reg `DataBus i_WriteData;    
     
-    Instr_Fetch Instr_Fetch0(clk, reset, Instr);
-    
+    Register Register0(
+        i_reset, 
+        i_clk, i_ce, 
+        i_re1, 
+        i_ReadReg1, 
+        o_ReadData1, 
+        i_re2, 
+        i_ReadReg2, 
+        o_ReadData2, 
+        i_we, 
+        i_WriteReg, 
+        i_WriteData);
+        
     initial 
     begin
-        clk = 0;
-        forever #10 clk = ~clk;
+        i_reset = `ResetDisable;
+        #5 i_reset = ~i_reset;
+        #15 i_reset = ~i_reset;
+                
+        i_ce = `ChipEnable;
+        i_clk = 0;
+        #10 i_clk = ~i_clk;
+        #10 i_clk = ~i_clk;
+        #10 i_clk = ~i_clk;
     end
     
-    initial 
+    initial
     begin
-        reset = `ResetDisable;
-        forever #150 reset = ~reset;
+        i_ReadReg1 = 1;
+        i_ReadReg2 = 9;
+        i_WriteReg = 29;
     end
 
 endmodule
