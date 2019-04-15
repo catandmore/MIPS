@@ -35,7 +35,7 @@ module test_bench( );
     reg `RegAddrWide i_WriteReg;
     reg `DataBus i_WriteData;    
     
-    Register Register0(
+    Regiters Regiters0(
         i_reset, 
         i_clk, i_ce, 
         i_re1, 
@@ -50,11 +50,12 @@ module test_bench( );
         
     initial 
     begin
-        i_reset = `ResetDisable;
-        #5 i_reset = ~i_reset;
-        #15 i_reset = ~i_reset;
-                
+        i_reset = `ResetEnable;
+        #1 i_reset = ~i_reset;
+        i_re1 = `ReadEnable;
+        i_re2 = `ReadEnable;        
         i_ce = `ChipEnable;
+        i_we = `WriteEnable;
         i_clk = 0;
         #10 i_clk = ~i_clk;
         #10 i_clk = ~i_clk;
@@ -66,6 +67,8 @@ module test_bench( );
         i_ReadReg1 = 1;
         i_ReadReg2 = 9;
         i_WriteReg = 29;
+        
+        i_WriteData = 29;
     end
 
 endmodule

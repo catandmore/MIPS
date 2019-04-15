@@ -1,8 +1,6 @@
 # compile verilog/system verilog design source files
 verilog xil_defaultlib  \
-"../../../../MIPS32.srcs/sources_1/new/Instr_Fetch.v" \
-"../../../../MIPS32.srcs/sources_1/new/PC_reg.v" \
-"../../../../MIPS32.srcs/sources_1/new/ROM.v" \
+"../../../../MIPS32.srcs/sources_1/new/Regiters.v" \
 "../../../../MIPS32.srcs/sim_1/new/TestBench.v" \
 
 # compile glbl module
