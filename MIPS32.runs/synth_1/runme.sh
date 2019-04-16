@@ -24,7 +24,7 @@ else
 fi
 export LD_LIBRARY_PATH
 
-HD_PWD='C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.runs/synth_1'
+HD_PWD='C:/Users/q1109/Downloads/MIPS-master/MIPS32.runs/synth_1'
 cd "$HD_PWD"
 
 HD_LOG=runme.log
@@ -40,4 +40,4 @@ EAStep()
      fi
 }
 
-EAStep vivado -log Regiters.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Regiters.tcl
+EAStep vivado -log Instr_Decode.vds -m64 -product Vivado -mode batch -messageDb vivado.pb -notrace -source Instr_Decode.tcl

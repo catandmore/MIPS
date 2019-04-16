@@ -22,15 +22,17 @@ create_project -in_memory -part xc7a50tcpg236-3
 set_param project.singleFileAddWarning.threshold 0
 set_param project.compositeFile.enableAutoGeneration 0
 set_param synth.vivado.isSynthRun true
-set_property webtalk.parent_dir C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.cache/wt [current_project]
-set_property parent.project_path C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.xpr [current_project]
+set_property webtalk.parent_dir C:/Users/q1109/Downloads/MIPS-master/MIPS32.cache/wt [current_project]
+set_property parent.project_path C:/Users/q1109/Downloads/MIPS-master/MIPS32.xpr [current_project]
 set_property default_lib xil_defaultlib [current_project]
 set_property target_language Verilog [current_project]
-set_property ip_output_repo c:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.cache/ip [current_project]
+set_property ip_output_repo c:/Users/q1109/Downloads/MIPS-master/MIPS32.cache/ip [current_project]
 set_property ip_cache_permissions {read write} [current_project]
 read_verilog -library xil_defaultlib {
-  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/Define.v
-  C:/Users/q1109/Documents/VivadoProject/MIPS32/MIPS32.srcs/sources_1/new/Regiters.v
+  C:/Users/q1109/Downloads/MIPS-master/MIPS32.srcs/sources_1/new/Define.v
+  C:/Users/q1109/Downloads/MIPS-master/MIPS32.srcs/sources_1/new/Decoder.v
+  C:/Users/q1109/Downloads/MIPS-master/MIPS32.srcs/sources_1/new/Regiters.v
+  C:/Users/q1109/Downloads/MIPS-master/MIPS32.srcs/sources_1/new/Instr_Decode.v
 }
 # Mark all dcp files as not used in implementation to prevent them from being
 # stitched into the results of this synthesis run. Any black boxes in the
@@ -43,12 +45,12 @@ foreach dcp [get_files -quiet -all -filter file_type=="Design\ Checkpoint"] {
 set_param ips.enableIPCacheLiteLoad 0
 close [open __synthesis_is_running__ w]
 
-synth_design -top Regiters -part xc7a50tcpg236-3
+synth_design -top Instr_Decode -part xc7a50tcpg236-3
 
 
 # disable binary constraint mode for synth run checkpoints
 set_param constraints.enableBinaryConstraints false
-write_checkpoint -force -noxdef Regiters.dcp
-create_report "synth_1_synth_report_utilization_0" "report_utilization -file Regiters_utilization_synth.rpt -pb Regiters_utilization_synth.pb"
+write_checkpoint -force -noxdef Instr_Decode.dcp
+create_report "synth_1_synth_report_utilization_0" "report_utilization -file Instr_Decode_utilization_synth.rpt -pb Instr_Decode_utilization_synth.pb"
 file delete __synthesis_is_running__
 close [open __synthesis_is_complete__ w]

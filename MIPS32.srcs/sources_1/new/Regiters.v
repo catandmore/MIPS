@@ -41,6 +41,10 @@ module Regiters(
    
     //¶¨Òå¼Ä´æÆ÷×é
     reg `DataBus Regsiter [`NumRegs-1:0];
+    initial
+    begin
+        Regsiter[0] = 0;
+    end
     
     //¸´Î»
     always @ reset
@@ -52,10 +56,10 @@ module Regiters(
     end
   
     //¶Á¼Ä´æÆ÷1Âß¼­
-    assign ReadData1 = (re1==`ChipEnable)?`NonData:Regsiter[ReadReg1];
+    assign ReadData1 = (re1==`ChipDisable)?`NonData:Regsiter[ReadReg1];
     
     //¶Á¼Ä´æÆ÷2Âß¼­
-    assign ReadData2 = (re2==`ChipEnable)?`NonData:Regsiter[ReadReg2];
+    assign ReadData2 = (re2==`ChipDisable)?`NonData:Regsiter[ReadReg2];
   
     //Ð´¼Ä´æÆ÷Âß¼­ 
     always @ WriteData

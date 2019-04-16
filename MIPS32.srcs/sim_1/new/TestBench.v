@@ -22,53 +22,32 @@
 
 
 module test_bench( );
-    reg i_reset;
-    reg i_clk;
-    reg i_ce; 
-    reg i_re1;
-    reg `RegAddrWide i_ReadReg1;
-    wire `DataBus o_ReadData1;
-    reg i_re2;
-    reg `RegAddrWide i_ReadReg2;
-    wire `DataBus o_ReadData2;
-    reg i_we;
-    reg `RegAddrWide i_WriteReg;
-    reg `DataBus i_WriteData;    
-    
-    Regiters Regiters0(
-        i_reset, 
-        i_clk, i_ce, 
-        i_re1, 
-        i_ReadReg1, 
-        o_ReadData1, 
-        i_re2, 
-        i_ReadReg2, 
-        o_ReadData2, 
-        i_we, 
-        i_WriteReg, 
-        i_WriteData);
-        
-    initial 
-    begin
-        i_reset = `ResetEnable;
-        #1 i_reset = ~i_reset;
-        i_re1 = `ReadEnable;
-        i_re2 = `ReadEnable;        
-        i_ce = `ChipEnable;
-        i_we = `WriteEnable;
-        i_clk = 0;
-        #10 i_clk = ~i_clk;
-        #10 i_clk = ~i_clk;
-        #10 i_clk = ~i_clk;
-    end
+    reg clk;
+    reg reset;
+    reg `InstrBus instr;
+    wire  `DataBus operand1;
+    wire  `DataBus operand2;
+    wire  [2:0] op_type;
+    wire  [7:0] sub_op_type;
     
     initial
     begin
-        i_ReadReg1 = 1;
-        i_ReadReg2 = 9;
-        i_WriteReg = 29;
-        
-        i_WriteData = 29;
+        instr = 32'b00110100000000001010101010101010;
+        clk = 0;
+        reset = `ResetDisable;
+        #10 clk = ~clk;
+        #10 clk = ~clk;
     end
-
+    
+    
+    
+    Instr_Decode Instr_Decode0(
+        clk,
+        reset,
+        instr,
+        operand1,
+        operand2,
+        op_type,
+        sub_op_type
+        );
 endmodule

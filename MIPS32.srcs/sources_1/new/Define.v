@@ -6,7 +6,7 @@
 `define ResetDisable        1'b0
 `define ChipEnable          1'b1
 `define ChipDisable         1'b0
-`define NonAddr             Z
+`define NonAddr             1'bz
 `define AddrBus             [15:0]
 `define DataBus             [31:0]
 `define InstrBus            [31:0]

@@ -47,7 +47,11 @@ module Decoder(
     wire [4:0] rs = instr[25:21];
     wire [4:0] rt = instr[20:16];
     wire [15:0] imm = instr[15:0];
- 
+    
+    always @ read_reg_data1
+    begin
+        operand1 = read_reg_data1;
+    end
     
     always @ (posedge clk)
     begin
@@ -69,7 +73,7 @@ module Decoder(
                     write_reg_ce = `ChipEnable;
                     op_type = `Logic;
                     sub_op_type = `Or;
-                    operand1 = read_reg_data1;
+//                    operand1 = read_reg_data1;
                     operand2 = {16'h0, imm};
                 end  
             endcase
