@@ -43,7 +43,7 @@ module Regiters(
     reg `DataBus Regsiter [`NumRegs-1:0];
     initial
     begin
-        Regsiter[0] = 0;
+        Regsiter[0] = 32'h00005555;
     end
     
     //¸´Î»

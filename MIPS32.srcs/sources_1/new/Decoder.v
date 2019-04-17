@@ -23,7 +23,6 @@
 
 module Decoder(
     input reset,
-    input clk,
     //读取指令信息
     input `InstrBus instr,
     input `DataBus read_reg_data1,
@@ -48,12 +47,8 @@ module Decoder(
     wire [4:0] rt = instr[20:16];
     wire [15:0] imm = instr[15:0];
     
-    always @ read_reg_data1
-    begin
-        operand1 = read_reg_data1;
-    end
     
-    always @ (posedge clk)
+    always @ (*)
     begin
         if(reset == `ResetEnable)
         begin
@@ -73,8 +68,21 @@ module Decoder(
                     write_reg_ce = `ChipEnable;
                     op_type = `Logic;
                     sub_op_type = `Or;
-//                    operand1 = read_reg_data1;
+                    operand1 = read_reg_data1;
                     operand2 = {16'h0, imm};
+                end
+                default:
+                begin;
+                    read_reg_addr1 = `NonData;
+                    read_reg_addr2 = `NonData;
+                    write_reg_addr = `NonData;
+                    read_reg_ce1 = `NonData;
+                    read_reg_ce2 = `NonData;
+                    write_reg_ce = `NonData;
+                    op_type = `NonData;
+                    sub_op_type = `NonData;
+                    operand1 = `NonData;
+                    operand2 = `NonData;
                 end  
             endcase
         end

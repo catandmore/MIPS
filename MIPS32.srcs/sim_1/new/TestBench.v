@@ -22,32 +22,56 @@
 
 
 module test_bench( );
-    reg clk;
-    reg reset;
-    reg `InstrBus instr;
-    wire  `DataBus operand1;
-    wire  `DataBus operand2;
-    wire  [2:0] op_type;
-    wire  [7:0] sub_op_type;
+    reg i_clk;
+    reg i_reset;
+    reg `InstrBus i_instr;
+    reg i_write_reg_ce;
+    reg `RegBus i_write_reg_addr;
+    reg `DataBus i_write_reg_data;
+    
+    wire  `DataBus o_operand1;
+    wire  `DataBus o_operand2;
+    wire  [2:0] o_op_type;
+    wire  [7:0] o_sub_op_type;
+    wire o_write_reg_ce;
+    wire `RegBus o_write_reg_add;
     
     initial
     begin
-        instr = 32'b00110100000000001010101010101010;
-        clk = 0;
-        reset = `ResetDisable;
-        #10 clk = ~clk;
-        #10 clk = ~clk;
+        i_clk = 0;
+        i_reset = `ResetDisable;
+        i_instr = 32'b00110100000000001010101010101010;
+        i_write_reg_ce = `NonData;
+        i_write_reg_addr = `NonData;
+        i_write_reg_data = `NonData;
+        
+        #20 
+        i_clk = ~i_clk;
+        #10
+        i_clk = ~i_clk;
+        i_instr = 0;
+        #200
+                i_clk = ~i_clk;
+                #10
+                i_clk = ~i_clk;
     end
     
-    
-    
     Instr_Decode Instr_Decode0(
-        clk,
-        reset,
-        instr,
-        operand1,
-        operand2,
-        op_type,
-        sub_op_type
-        );
+     i_clk,
+         i_reset,
+          i_instr,
+         i_write_reg_ce,
+          i_write_reg_addr,
+          i_write_reg_data,
+        
+        o_operand1,
+        o_operand2,
+        o_op_type,
+        o_sub_op_type,
+        o_write_reg_ce,
+        o_write_reg_add
+     );    
+
+    
+   
 endmodule
